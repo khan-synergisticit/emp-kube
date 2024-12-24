@@ -1,0 +1,30 @@
+apiVersion: v1
+data:
+  docker-compose.yml: |
+    services:
+      emp-backend:
+        container_name: emp-backend
+        image: khanster/emp-backend:latest
+        ports:
+          - "8020:8020"
+        networks:
+          - angular
+        environment:
+          - SPRING_DATASOURCE_URL=jdbc:mysql://${DB_IP}:3306/employee_management?autoReconnect=true
+          - SPRING_DATASOURCE_USERNAME=${DB_USERNAME}
+          - SPRING_DATASOURCE_PASSWORD=${DB_PASSWORD}
+          - DEVOPS_IP=${DEVOPS_IP}
+        volumes:
+          - .:/usr/app
+          - ./.m2:/root/.m2
+
+
+    networks:
+      angular:
+        name: angular
+        external: true
+kind: ConfigMap
+metadata:
+  labels:
+    io.kompose.service: emp-backend
+  name: emp-backend-cm0

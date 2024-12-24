@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: emp-frontend
+  name: emp-frontend
+spec:
+  type: LoadBalancer
+  clusterIP: 10.96.0.14
+  externalTrafficPolicy: Local
+  ports:
+    - name: "8080"
+      port: 8080
+      targetPort: 8080
+  selector:
+    app: emp-frontend

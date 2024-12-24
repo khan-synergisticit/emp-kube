@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: emp-app
+  namespace: emp
+spec:
+  containers:
+  - name: emp-frontend
+    image: khanster/emp-frontend:latest
+    ports: 
+    - containerPort: 8080
+  - name: emp-backend
+    image: khanster/emp-backend:latest
+    ports: 
+    - containerPort: 8020
+  - name: mysql
+    image: khanster/mysql:latest
+    ports: 
+    - containerPort: 3306

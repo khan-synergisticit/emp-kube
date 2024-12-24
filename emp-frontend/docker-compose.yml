@@ -1,0 +1,17 @@
+services:
+  emp-frontend:
+    # image: khanster/frontend:latest
+    container_name: emp-frontend
+    image: khanster/emp-frontend:latest
+    ports:
+      - "8080:8080"
+    networks:
+      - angular
+    volumes:
+      - .:/usr/app
+      - ./.m2:/root/.m2
+
+networks:
+  angular:
+    name: angular
+    external: true

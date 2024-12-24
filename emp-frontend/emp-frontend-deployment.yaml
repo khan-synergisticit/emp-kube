@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: emp-frontend
+  name: emp-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: emp-frontend
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: emp-frontend
+    spec:
+      containers:
+        - image: khanster/emp-frontend:latest
+          name: emp-frontend
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+      restartPolicy: Always
