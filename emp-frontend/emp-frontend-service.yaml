@@ -7,6 +7,8 @@ metadata:
 spec:
   type: LoadBalancer
   clusterIP: 10.96.0.14
+  externalIPs:
+    - 192.168.0.14
   externalTrafficPolicy: Local
   ports:
     - name: "8080"
