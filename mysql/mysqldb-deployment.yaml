@@ -19,12 +19,12 @@ spec:
       containers:
         - env:
             - name: MYSQL_DATABASE
-              value: ecommerce_db
+              value: "employee_management"
             - name: MYSQL_ROOT_HOST
-              value: '%'
+              value: "'%'"
             - name: MYSQL_ROOT_PASSWORD
-              value: root
-          image: khanster/mysql:latest
+              value: "root"
+          image: mysql:8.0
           name: mysqldb
           ports:
             - containerPort: 3306
