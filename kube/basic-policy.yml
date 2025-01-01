@@ -1,0 +1,33 @@
+# cat <<EOF | calicoctl create -f -
+- apiVersion: projectcalico.org/v3
+  kind: GlobalNetworkPolicy
+  metadata:
+    name: failsafe
+  spec:
+    selector: "all()"
+    order: 0
+    ingress:
+    - action: Allow
+      protocol: TCP
+      source:
+        nets:
+        - 192.168.0.0/16
+      destination:
+        ports: 
+          - 8080
+    - action: Allow
+      protocol: ICMP
+    egress:
+    - action: Allow
+      protocol: TCP
+      destination:
+        nets: 
+          - 0.0.0.0/0
+        ports:
+          - 8080
+    - action: Allow
+      protocol: UDP
+      destination:
+        ports: [67]
+# EOF
+

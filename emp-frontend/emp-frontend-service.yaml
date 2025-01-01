@@ -5,11 +5,8 @@ metadata:
     app: emp-frontend
   name: emp-frontend
 spec:
-  type: LoadBalancer
+  type: NodePort
   clusterIP: 10.96.0.14
-  externalIPs:
-    - 192.168.100.14
-  externalTrafficPolicy: Local
   ports:
     - protocol: TCP
       port: 8080
