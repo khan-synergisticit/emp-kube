@@ -13,6 +13,9 @@ spec:
     type: Recreate
   template:
     metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.34.0 (cbf2835db)
       labels:
         app: emp-frontend
     spec:
@@ -22,4 +25,50 @@ spec:
           ports:
             - containerPort: 8080
               protocol: TCP
+          volumeMounts:
+            - mountPath: /usr/app
+              name: emp-frontend-cm0
+            - mountPath: /root/.m2
+              name: emp-frontend-claim1
       restartPolicy: Always
+      volumes:
+        - configMap:
+            name: emp-frontend-cm0
+          name: emp-frontend-cm0
+        - name: emp-frontend-claim1
+          persistentVolumeClaim:
+            claimName: emp-frontend-claim1
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: emp-frontend
+  name: emp-frontend
+spec:
+  type: LoadBalancer
+  clusterIP: 10.96.0.14
+  externalTrafficPolicy: Local
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+  selector:
+    app: emp-frontend
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app: emp-frontend-claim1
+  name: emp-frontend-claim1
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Mi

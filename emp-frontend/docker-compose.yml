@@ -7,9 +7,6 @@ services:
       - "8080:8080"
     networks:
       - angular
-    volumes:
-      - .:/usr/app
-      - ./.m2:/root/.m2
 
 networks:
   angular:

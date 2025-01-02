@@ -1,8 +1,6 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  labels:
-    app: mysqldb
   name: mysqldb
 spec:
   replicas: 1
@@ -17,14 +15,18 @@ spec:
         app: mysqldb
     spec:
       containers:
+        resources:
+            limits:
+              memory: "2Gi"
+              cpu: "1000m"
         - env:
             - name: MYSQL_DATABASE
-              value: "employee_management"
+              value: ecommerce_db
             - name: MYSQL_ROOT_HOST
-              value: "'%'"
+              value: '%'
             - name: MYSQL_ROOT_PASSWORD
-              value: "root"
-          image: mysql:8.0
+              value: root
+          image: khanster/mysql:latest
           name: mysqldb
           ports:
             - containerPort: 3306

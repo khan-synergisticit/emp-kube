@@ -21,5 +21,5 @@ data:
 kind: ConfigMap
 metadata:
   labels:
-    io.kompose.service: emp-frontend
+    app: emp-frontend
   name: emp-frontend-cm0

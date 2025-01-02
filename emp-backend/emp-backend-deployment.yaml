@@ -19,13 +19,13 @@ spec:
       containers:
         - env:
             - name: DEVOPS_IP
-              value: "10.96.0.14"
+            - value: 34.123.127.88
             - name: SPRING_DATASOURCE_PASSWORD
-              value: "root"
+            - value: root
             - name: SPRING_DATASOURCE_URL
-              value: "jdbc:mysql://10.96.0.11:3306/employee_management?autoReconnect=true"
+              value: jdbc:mysql://34.118.229.236:3306/employee_management?autoReconnect=true
             - name: SPRING_DATASOURCE_USERNAME
-              value: "root"
+            - value: root
           image: khanster/emp-backend:latest
           name: emp-backend
           ports:

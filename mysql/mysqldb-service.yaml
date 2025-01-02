@@ -5,11 +5,9 @@ metadata:
     app: mysqldb
   name: mysqldb
 spec:
-  type: LoadBalancer
-  clusterIP: 10.96.0.11
-  externalTrafficPolicy: Local
+  type: NodePort
   ports:
-    - name: "3306"
+    - protocol: TCP
       port: 3306
       targetPort: 3306
   selector:

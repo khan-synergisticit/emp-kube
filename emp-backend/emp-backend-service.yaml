@@ -6,11 +6,9 @@ metadata:
   name: emp-backend
 spec:
   type: LoadBalancer
-  clusterIP: 10.96.0.13
-  externalTrafficPolicy: Local
   ports:
-    - name: "8020"
+    - protocol: TCP
       port: 8020
       targetPort: 8020
   selector:
-    app: emp-backend
+    io.kompose.service: emp-backend
