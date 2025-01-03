@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: emp-backend
+  name: emp-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: emp-backend
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: emp-backend
+    spec:
+      containers:
+        - env:
+            - name: DEVOPS_IP
+              value: "34.123.127.88"
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: "root"
+            - name: SPRING_DATASOURCE_URL
+              value: "jdbc:mysql://34.118.229.236:3306/employee_management?autoReconnect=true"
+            - name: SPRING_DATASOURCE_USERNAME
+              value: "root"
+          image: khanster/emp-backend:latest
+          resources:
+            requests:
+              cpu: 10m
+          name: emp-backend
+          ports:
+            - containerPort: 8020
+              protocol: TCP
+      restartPolicy: Always
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: emp-backend
+  name: emp-backend
+spec:
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 8020
+      targetPort: 8020
+  selector:
+    io.kompose.service: emp-backend
