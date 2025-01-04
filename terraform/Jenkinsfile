@@ -1,0 +1,23 @@
+pipeline {
+    agent {
+        label "agent007"
+    }
+
+    stages {
+        stage('Hello') {
+            steps {
+                script{
+                    withCredentials([sshUserPrivateKey(credentialsId: 'emp-key', keyFileVariable: 'PK',  usernameVariable: 'userName')]){
+                        def remote = [:];
+                        remote.name = "35.224.143.44";
+                        remote.host = "35.224.143.44";
+                        remote.user = userName;
+                        remote.identityFile = PK;
+                        remote.allowAnyHosts = true;
+                        sshCommand remote: remote, command: "ls"
+                    }
+                }
+            }
+        }
+    }
+}

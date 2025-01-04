@@ -1,0 +1,17 @@
+services:
+  agent007:
+    image: jenkins/ssh-agent:jdk17
+    privileged: true
+    user: root
+    container_name: agent007
+    expose:
+      - 22
+    networks:
+      - jenkins
+    environment:
+      - JENKINS_AGENT_SSH_PUBKEY=$JENKINS_AGENT_SSH_PUBKEY
+networks:
+  jenkins:
+#JENKINS_AGENT_SSH_PUBKEY=$JENKINS_AGENT_SSH_PUBKEY docker compose up
+#docker network connect jenkins ktrandev415-jenkins_app-1
+#docker exec -ti ktrandev415-jenkins_app-1 ping agent007
